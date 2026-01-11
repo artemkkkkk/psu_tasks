@@ -130,12 +130,20 @@ int main() {
                     std::cout << "Сначала создайте квадрат (пункт 1).\n";
                     break;
                 }
-                std::string filename;
-                std::cout << "Введите имя файла для сохранения (например, square.txt): ";
-                std::getline(std::cin, filename);
-                if (filename.empty()) {
-                    filename = "magic_square.txt";
+                std::string basename;
+                std::cout << "Введите имя файла для сохранения (например, test_square): ";
+                std::getline(std::cin, basename);
+                if (basename.empty()) {
+                    basename = "magic_square";
                 }
+
+                size_t last_dot = basename.find_last_of('.');
+                if (last_dot != std::string::npos && last_dot > 0 && last_dot < basename.length() - 1) {
+                    basename = basename.substr(0, last_dot);
+                }
+
+                std::string filename = basename + ".txt";
+
                 if (SaveSquareToFile(current_square, filename)) {
                     std::cout << "Квадрат успешно сохранён в файл '" << filename << "'.\n";
                 } else {
