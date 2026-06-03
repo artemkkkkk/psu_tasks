@@ -3,14 +3,9 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
-  <component name="BackendCodeEditorMiscSettings">
-    <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
-    <option name="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue" value="true" type="bool" />
-    <option name="/Default/RiderDebugger/RiderRestoreDecompile/RestoreDecompileSetting/@EntryValue" value="false" type="bool" />
-  </component>
-  <component name="CMakePresetLoader">{
-  &quot;useNewFormat&quot;: true
-}</component>
+  <component name="CMakePresetLoader"><![CDATA[{
+  "useNewFormat": true
+}]]></component>
   <component name="CMakeProjectFlavorService">
     <option name="flavorId" value="CMakePlainProjectFlavor" />
   </component>
@@ -19,7 +14,7 @@
   </component>
   <component name="CMakeRunConfigurationManager">
     <generated>
-      <config projectName="lab11" targetName="lab11" />
+      <config projectName="graf8" targetName="graf8" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -28,8 +23,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e09ca212-9f1f-4f83-85ff-963de77c3a6a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../lab9/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../lab9/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="f62d462c-1631-44a1-853c-80dd415c1c1a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../lab11/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab11/.idea/editor.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab11/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab11/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab9/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab9/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +38,7 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
@@ -49,24 +46,20 @@
     <option name="minorVersion" value="2.2" />
     <option name="productBranch" value="Classic" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 6
-}</component>
-  <component name="ProjectId" id="3BwvZDvqKhJTnKfgxqSL9xvJhwF" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="1" id="Add" />
-  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="3Edh5bEQ8JGjItZ14k246PNNITw" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "CMake Application.lab11.executor": "Run",
+    "CMake Application.graf8.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.RadMigrateCodeStyle": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
@@ -74,18 +67,23 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/t0pch/CLionProjects/psu_tasks/labs/lab11",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "C:/Users/t0pch/CLionProjects/psu_tasks/labs/lab11/main.cpp",
+    "onboarding.tips.debug.path": "C:/Users/t0pch/CLionProjects/psu_tasks/labs/lab21/graf8/main.cpp",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\t0pch\CLionProjects\psu_tasks\labs\lab21\graf8" />
+    </key>
+  </component>
   <component name="RunManager">
-    <configuration name="lab11" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="lab11" TARGET_NAME="lab11" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="lab11" RUN_TARGET_NAME="lab11">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="graf8" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="graf8" TARGET_NAME="graf8" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="graf8" RUN_TARGET_NAME="graf8">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -93,13 +91,12 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e09ca212-9f1f-4f83-85ff-963de77c3a6a" name="Changes" comment="" />
-      <created>1775413000924</created>
+      <changelist id="f62d462c-1631-44a1-853c-80dd415c1c1a" name="Changes" comment="" />
+      <created>1780514171421</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1775413000924</updated>
-      <workItem from="1775413002080" duration="1316000" />
-      <workItem from="1780512556429" duration="5000" />
+      <updated>1780514171421</updated>
+      <workItem from="1780514172532" duration="225000" />
     </task>
     <servers />
   </component>
