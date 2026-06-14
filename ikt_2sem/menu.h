@@ -6,8 +6,11 @@
 class Menu {
 public:
     void displayMainMenu();
+    void displayInputMenu();
     void displayInfo();
-    std::string getExpressionInput();
+    std::string getExpressionFromConsole();
+    std::string getExpressionFromFile();
+    std::string generateRandomExpression();
     bool askContinue();
     void clearScreen();
     void pause();
