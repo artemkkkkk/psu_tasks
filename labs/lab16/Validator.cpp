@@ -1,6 +1,7 @@
 #include "Validator.h"
 #include <algorithm>
 #include <cctype>
+#include <cstdlib>
 
 bool Validator::isValidInteger(const std::string& input) {
     if (input.empty()) {
@@ -25,12 +26,8 @@ bool Validator::isValidPositiveInteger(const std::string& input) {
     if (!isValidInteger(input)) {
         return false;
     }
-    try {
-        int value = std::stoi(input);
-        return value > 0;
-    } catch (...) {
-        return false;
-    }
+    int value = std::atoi(input.c_str());
+    return value > 0;
 }
 
 bool Validator::isValidFilename(const std::string& filename) {
@@ -47,10 +44,6 @@ bool Validator::isValidFilename(const std::string& filename) {
 
 bool Validator::isValidMenuChoice(int choice, int maxChoice) {
     return choice >= 0 && choice <= maxChoice;
-}
-
-bool Validator::isValidTreeValues(const std::vector<int>& values) {
-    return !values.empty();
 }
 
 bool Validator::isNotEmpty(const std::string& input) {

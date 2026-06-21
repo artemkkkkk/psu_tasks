@@ -15,7 +15,7 @@ int InputHandler::readValidPositiveInteger(const std::string& prompt) {
             continue;
         }
         if (Validator::isValidPositiveInteger(input)) {
-            return std::stoi(input);
+            return std::atoi(input.c_str());
         }
         std::cout << "Некорректное положительное целое число. Попробуйте снова." << std::endl;
     }
@@ -33,7 +33,7 @@ int InputHandler::readValidNonNegativeInteger(const std::string& prompt) {
             continue;
         }
         if (Validator::isValidNonNegativeInteger(input)) {
-            return std::stoi(input);
+            return std::atoi(input.c_str());
         }
         std::cout << "Некорректное неотрицательное целое число. Попробуйте снова." << std::endl;
     }
@@ -51,7 +51,7 @@ int InputHandler::readValidVertexNumber(const std::string& prompt, int vertexCou
             continue;
         }
         if (Validator::isValidPositiveInteger(input)) {
-            int value = std::stoi(input);
+            int value = std::atoi(input.c_str());
             if (Validator::isValidVertexNumber(value, vertexCount)) {
                 return value;
             }

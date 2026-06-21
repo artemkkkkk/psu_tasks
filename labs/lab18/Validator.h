@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include <vector>
+#include "DynamicArray.h"
 
 class Validator {
 public:
@@ -8,6 +8,6 @@ public:
     static bool isValidPositiveInteger(const std::string& input);
     static bool isValidFilename(const std::string& filename);
     static bool isValidMenuChoice(int choice, int maxChoice);
-    static bool isValidTreeValues(const std::vector<int>& values);
+    static bool isValidTreeValues(const DynamicArray<int>& values);
     static bool isNotEmpty(const std::string& input);
 };

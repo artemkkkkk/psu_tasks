@@ -1,7 +1,8 @@
 #pragma once
 #include "TreeNode.h"
-#include <vector>
+#include "DynamicArray.h"
 #include <string>
+#include <iostream>
 
 class BinaryTree {
 protected:
@@ -10,6 +11,8 @@ protected:
     void destroyTree(TreeNode* node);
     TreeNode* copyTree(TreeNode* node);
     void printGraphical(TreeNode* node, const std::string& prefix, bool isLeft, std::ostream& out) const;
+    void postOrderTraversal(TreeNode* node, DynamicArray<int>& result) const;
+    int calculateDepth(TreeNode* node) const;
     int countNodes(TreeNode* node) const;
 
 public:
@@ -25,13 +28,8 @@ public:
     void insertLevelOrder(int value);
     void insertSearch(int value);
 
-    void postOrderTraversal(TreeNode* node, std::vector<int>& result) const;
-    std::vector<int> getPostOrder() const;
-
-    int calculateDepth(TreeNode* node) const;
+    DynamicArray<int> getPostOrder() const;
     int getDepth() const;
-
-    int findSecondMinimum(TreeNode* node, TreeNode*& parent, bool& found) const;
     int getSecondMinimum() const;
 
     void printGraphical(std::ostream& out) const;

@@ -1,5 +1,5 @@
 #include "ExpressionTree.h"
-#include <stack>
+#include "Stack.h"
 #include <stdexcept>
 #include <sstream>
 #include <cctype>
@@ -57,7 +57,7 @@ bool ExpressionTree::isEmpty() const {
 }
 
 void ExpressionTree::buildFromPostfix(const std::string& expression) {
-    std::stack<TreeNode*> stack;
+    Stack<TreeNode*> stack;
     std::istringstream iss(expression);
     std::string token;
 
@@ -112,14 +112,14 @@ void ExpressionTree::buildFromPostfix(const std::string& expression) {
         }
     }
 
-    if (!stack.empty()) {
+    if (!stack.isEmpty()) {
         root = stack.top();
     }
 }
 
 void ExpressionTree::buildFromInfix(const std::string& expression) {
-    std::stack<TreeNode*> valueStack;
-    std::stack<char> opStack;
+    Stack<TreeNode*> valueStack;
+    Stack<char> opStack;
     std::string expr = expression;
 
     auto precedence = [](char op) -> int {
@@ -168,19 +168,19 @@ void ExpressionTree::buildFromInfix(const std::string& expression) {
                 i++;
             }
             valueStack.push(new TreeNode(std::stoi(num)));
-        } else if (expr[i] == '+' || expr[i] == '-' || expr[i] == '*' || 
+        } else if (expr[i] == '+' || expr[i] == '-' || expr[i] == '*' ||
                    expr[i] == '/' || expr[i] == '%' || expr[i] == '^') {
-            while (!opStack.empty() && opStack.top() != '(' &&
+            while (!opStack.isEmpty() && opStack.top() != '(' &&
                    precedence(opStack.top()) >= precedence(expr[i])) {
                 applyOperator();
             }
             opStack.push(expr[i]);
             i++;
         } else if (expr[i] == ')') {
-            while (!opStack.empty() && opStack.top() != '(') {
+            while (!opStack.isEmpty() && opStack.top() != '(') {
                 applyOperator();
             }
-            if (!opStack.empty() && opStack.top() == '(') {
+            if (!opStack.isEmpty() && opStack.top() == '(') {
                 opStack.pop();
             }
             i++;
@@ -189,11 +189,11 @@ void ExpressionTree::buildFromInfix(const std::string& expression) {
         }
     }
 
-    while (!opStack.empty()) {
+    while (!opStack.isEmpty()) {
         applyOperator();
     }
 
-    if (!valueStack.empty()) {
+    if (!valueStack.isEmpty()) {
         root = valueStack.top();
     }
 }
@@ -231,16 +231,6 @@ int ExpressionTree::calculate(int xValue) const {
     return evaluate(root, xValue);
 }
 
-bool ExpressionTree::containsVariable(TreeNode* node) const {
-    if (node == nullptr) {
-        return false;
-    }
-    if (node->isVar()) {
-        return true;
-    }
-    return containsVariable(node->getLeft()) || containsVariable(node->getRight());
-}
-
 void ExpressionTree::printGraphical(TreeNode* node, const std::string& prefix, bool isLeft, std::ostream& out) const {
     if (node == nullptr) {
         return;
@@ -267,33 +257,33 @@ void ExpressionTree::printGraphical(std::ostream& out) const {
     printGraphical(root, "", true, out);
 }
 
-void ExpressionTree::toPrefix(TreeNode* node, std::vector<std::string>& result) const {
+void ExpressionTree::toPrefix(TreeNode* node, DynamicArray<std::string>& result) const {
     if (node == nullptr) {
         return;
     }
     if (node->isVar()) {
-        result.push_back("x");
+        result.pushBack("x");
     } else if (node->isOperator()) {
-        result.push_back(node->getOperatorSymbol());
+        result.pushBack(node->getOperatorSymbol());
     } else {
-        result.push_back(std::to_string(node->getValue()));
+        result.pushBack(std::to_string(node->getValue()));
     }
     toPrefix(node->getLeft(), result);
     toPrefix(node->getRight(), result);
 }
 
-void ExpressionTree::toPostfix(TreeNode* node, std::vector<std::string>& result) const {
+void ExpressionTree::toPostfix(TreeNode* node, DynamicArray<std::string>& result) const {
     if (node == nullptr) {
         return;
     }
     toPostfix(node->getLeft(), result);
     toPostfix(node->getRight(), result);
     if (node->isVar()) {
-        result.push_back("x");
+        result.pushBack("x");
     } else if (node->isOperator()) {
-        result.push_back(node->getOperatorSymbol());
+        result.pushBack(node->getOperatorSymbol());
     } else {
-        result.push_back(std::to_string(node->getValue()));
+        result.pushBack(std::to_string(node->getValue()));
     }
 }
 
@@ -317,23 +307,23 @@ void ExpressionTree::toInfix(TreeNode* node, std::string& result) const {
 }
 
 std::string ExpressionTree::getPrefixNotation() const {
-    std::vector<std::string> result;
+    DynamicArray<std::string> result;
     toPrefix(root, result);
     std::string str;
-    for (size_t i = 0; i < result.size(); ++i) {
+    for (int i = 0; i < result.getSize(); ++i) {
         str += result[i];
-        if (i < result.size() - 1) str += " ";
+        if (i < result.getSize() - 1) str += " ";
     }
     return str;
 }
 
 std::string ExpressionTree::getPostfixNotation() const {
-    std::vector<std::string> result;
+    DynamicArray<std::string> result;
     toPostfix(root, result);
     std::string str;
-    for (size_t i = 0; i < result.size(); ++i) {
+    for (int i = 0; i < result.getSize(); ++i) {
         str += result[i];
-        if (i < result.size() - 1) str += " ";
+        if (i < result.getSize() - 1) str += " ";
     }
     return str;
 }

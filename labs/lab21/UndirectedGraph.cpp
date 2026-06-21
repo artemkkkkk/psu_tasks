@@ -1,6 +1,6 @@
 #include "UndirectedGraph.h"
 #include <fstream>
-#include <random>
+#include <cstdlib>
 #include <stdexcept>
 
 UndirectedGraph::UndirectedGraph() : Graph() {}
@@ -17,7 +17,7 @@ void UndirectedGraph::loadFromFile(const std::string& filename) {
         throw std::runtime_error("Некорректное количество вершин");
     }
     vertexCount = n;
-    adjacencyMatrix.assign(n, std::vector<int>(n, 0));
+    initializeMatrix(n);
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n; ++j) {
             if (!(file >> adjacencyMatrix[i][j])) {
@@ -38,7 +38,7 @@ void UndirectedGraph::loadFromConsole() {
         throw std::invalid_argument("Количество вершин должно быть положительным");
     }
     vertexCount = n;
-    adjacencyMatrix.assign(n, std::vector<int>(n, 0));
+    initializeMatrix(n);
     std::cout << "Введите матрицу смежности (" << n << "x" << n << "):" << std::endl;
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n; ++j) {
@@ -55,16 +55,15 @@ void UndirectedGraph::generateRandom(int vertexCount, double density) {
         throw std::invalid_argument("Количество вершин должно быть положительным");
     }
     this->vertexCount = vertexCount;
-    adjacencyMatrix.assign(vertexCount, std::vector<int>(vertexCount, 0));
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution<> dis(0.0, 1.0);
+    initializeMatrix(vertexCount);
     for (int i = 0; i < vertexCount; ++i) {
         for (int j = i; j < vertexCount; ++j) {
             if (i == j) {
-                adjacencyMatrix[i][j] = (dis(gen) < density * 0.1) ? 1 : 0;
+                double r = static_cast<double>(rand()) / RAND_MAX;
+                adjacencyMatrix[i][j] = (r < density * 0.1) ? 1 : 0;
             } else {
-                int value = (dis(gen) < density) ? 1 : 0;
+                double r = static_cast<double>(rand()) / RAND_MAX;
+                int value = (r < density) ? 1 : 0;
                 adjacencyMatrix[i][j] = value;
                 adjacencyMatrix[j][i] = value;
             }
@@ -72,8 +71,11 @@ void UndirectedGraph::generateRandom(int vertexCount, double density) {
     }
 }
 
-std::vector<int> UndirectedGraph::calculateDegrees() const {
-    std::vector<int> degrees(vertexCount, 0);
+DynamicArray<int> UndirectedGraph::calculateDegrees() const {
+    DynamicArray<int> degrees;
+    for (int i = 0; i < vertexCount; ++i) {
+        degrees.pushBack(0);
+    }
     for (int i = 0; i < vertexCount; ++i) {
         for (int j = 0; j < vertexCount; ++j) {
             if (adjacencyMatrix[i][j] != 0) {
@@ -89,7 +91,7 @@ std::vector<int> UndirectedGraph::calculateDegrees() const {
 }
 
 void UndirectedGraph::printDegrees(std::ostream& out) const {
-    std::vector<int> degrees = calculateDegrees();
+    DynamicArray<int> degrees = calculateDegrees();
     out << "Степени вершин:" << std::endl;
     for (int i = 0; i < vertexCount; ++i) {
         out << "Вершина " << (i + 1) << ": " << degrees[i] << std::endl;

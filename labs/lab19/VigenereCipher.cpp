@@ -44,10 +44,10 @@ std::string VigenereCipher::encrypt(const std::string& text) const {
     if (key.empty()) {
         throw std::runtime_error("Ключ не задан");
     }
-    
+
     std::string result = text;
     int keyIndex = 0;
-    
+
     for (size_t i = 0; i < text.length(); ++i) {
         if (std::isalpha(text[i])) {
             int shift = charToShift(key[keyIndex % key.length()]);
@@ -55,7 +55,7 @@ std::string VigenereCipher::encrypt(const std::string& text) const {
             keyIndex++;
         }
     }
-    
+
     return result;
 }
 
@@ -63,10 +63,10 @@ std::string VigenereCipher::decrypt(const std::string& text) const {
     if (key.empty()) {
         throw std::runtime_error("Ключ не задан");
     }
-    
+
     std::string result = text;
     int keyIndex = 0;
-    
+
     for (size_t i = 0; i < text.length(); ++i) {
         if (std::isalpha(text[i])) {
             int shift = charToShift(key[keyIndex % key.length()]);
@@ -74,6 +74,6 @@ std::string VigenereCipher::decrypt(const std::string& text) const {
             keyIndex++;
         }
     }
-    
+
     return result;
 }

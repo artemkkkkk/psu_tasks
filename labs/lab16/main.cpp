@@ -6,20 +6,20 @@
 #include "InputHandler.h"
 #include "Validator.h"
 #include <iostream>
-#include <vector>
 #include <stdexcept>
+#include <ctime>
 
-void buildTreeFromValues(BinaryTree& tree, const std::vector<int>& values, bool isSearchTree) {
-    for (int value : values) {
+void buildTreeFromValues(BinaryTree& tree, const DynamicArray<int>& values, bool isSearchTree) {
+    for (int i = 0; i < values.getSize(); ++i) {
         if (isSearchTree) {
-            tree.insertSearch(value);
+            tree.insertSearch(values[i]);
         } else {
-            tree.insertLevelOrder(value);
+            tree.insertLevelOrder(values[i]);
         }
     }
 }
 
-std::vector<int> getInputValues(const std::string& treeType) {
+DynamicArray<int> getInputValues(const std::string& treeType) {
     std::cout << "\n=== Ввод данных для " << treeType << " ===" << std::endl;
     std::cout << "1. Ввод из консоли" << std::endl;
     std::cout << "2. Ввод из файла" << std::endl;
@@ -48,7 +48,7 @@ std::vector<int> getInputValues(const std::string& treeType) {
             return InputHandler::generateRandom(count);
         }
         case 0:
-            return {};
+            return DynamicArray<int>();
         default:
             throw std::invalid_argument("Неверный выбор");
     }
@@ -58,13 +58,8 @@ void task1PostOrder() {
     std::cout << "\n========== TreeWork1: Концевой обход ==========" << std::endl;
 
     try {
-        std::vector<int> values = getInputValues("бинарного дерева");
-        if (values.empty()) {
-            return;
-        }
-
-        if (!Validator::isValidTreeValues(values)) {
-            std::cout << "Некорректные значения для дерева" << std::endl;
+        DynamicArray<int> values = getInputValues("бинарного дерева");
+        if (values.isEmpty()) {
             return;
         }
 
@@ -85,13 +80,8 @@ void task2Depth() {
     std::cout << "\n========== TreeWork14: Глубина дерева ==========" << std::endl;
 
     try {
-        std::vector<int> values = getInputValues("бинарного дерева");
-        if (values.empty()) {
-            return;
-        }
-
-        if (!Validator::isValidTreeValues(values)) {
-            std::cout << "Некорректные значения для дерева" << std::endl;
+        DynamicArray<int> values = getInputValues("бинарного дерева");
+        if (values.isEmpty()) {
             return;
         }
 
@@ -111,13 +101,8 @@ void task3SecondMinimum() {
     std::cout << "\n========== TreeWork17: Второе минимальное значение ==========" << std::endl;
 
     try {
-        std::vector<int> values = getInputValues("дерева поиска");
-        if (values.empty()) {
-            return;
-        }
-
-        if (!Validator::isValidTreeValues(values)) {
-            std::cout << "Некорректные значения для дерева" << std::endl;
+        DynamicArray<int> values = getInputValues("дерева поиска");
+        if (values.isEmpty()) {
             return;
         }
 
@@ -143,6 +128,8 @@ int main() {
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
 #endif
+
+    srand(static_cast<unsigned>(time(nullptr)));
 
     int choice;
     do {

@@ -1,7 +1,8 @@
 #pragma once
 #include "TreeNode.h"
+#include "DynamicArray.h"
 #include <string>
-#include <vector>
+#include <iostream>
 
 class ExpressionTree {
 protected:
@@ -11,9 +12,8 @@ protected:
     TreeNode* copyTree(TreeNode* node);
     void printGraphical(TreeNode* node, const std::string& prefix, bool isLeft, std::ostream& out) const;
     int evaluate(TreeNode* node, int xValue) const;
-    bool containsVariable(TreeNode* node) const;
-    void toPrefix(TreeNode* node, std::vector<std::string>& result) const;
-    void toPostfix(TreeNode* node, std::vector<std::string>& result) const;
+    void toPrefix(TreeNode* node, DynamicArray<std::string>& result) const;
+    void toPostfix(TreeNode* node, DynamicArray<std::string>& result) const;
     void toInfix(TreeNode* node, std::string& result) const;
 
 public:

@@ -1,6 +1,5 @@
 #pragma once
 #include "Graph.h"
-#include <vector>
 
 class UndirectedGraph : public Graph {
 public:
@@ -11,6 +10,6 @@ public:
     void loadFromConsole();
     void generateRandom(int vertexCount, double density);
 
-    std::vector<int> calculateDegrees() const;
+    DynamicArray<int> calculateDegrees() const;
     void printDegrees(std::ostream& out) const;
 };

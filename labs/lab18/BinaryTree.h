@@ -1,7 +1,7 @@
 #pragma once
 #include "TreeNode.h"
-#include <iostream>
 #include <string>
+#include <iostream>
 
 class BinaryTree {
 protected:
@@ -10,7 +10,7 @@ protected:
     void destroyTree(TreeNode* node);
     TreeNode* copyTree(TreeNode* node);
     void printGraphical(TreeNode* node, const std::string& prefix, bool isLeft, std::ostream& out) const;
-    void insertSearchHelper(TreeNode** node, int value);
+    void insertSearchHelper(TreeNode*& node, int value);
     void inOrderCollect(TreeNode* node, TreeNode*& prev, TreeNode*& head, TreeNode*& tail);
 
 public:
@@ -24,7 +24,6 @@ public:
     bool isEmpty() const;
 
     void insertSearch(int value);
-    void buildFromValues(const int* values, int count);
 
     void printGraphical(std::ostream& out) const;
 };

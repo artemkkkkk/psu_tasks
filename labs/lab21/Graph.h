@@ -1,12 +1,14 @@
 #pragma once
-#include <vector>
+#include "DynamicArray.h"
 #include <string>
 #include <iostream>
 
 class Graph {
 protected:
     int vertexCount;
-    std::vector<std::vector<int>> adjacencyMatrix;
+    DynamicArray<DynamicArray<int>> adjacencyMatrix;
+
+    void initializeMatrix(int n);
 
 public:
     Graph();
@@ -16,7 +18,7 @@ public:
     int getVertexCount() const;
     int getEdge(int i, int j) const;
     void setEdge(int i, int j, int value);
-    const std::vector<std::vector<int>>& getAdjacencyMatrix() const;
+    const DynamicArray<DynamicArray<int>>& getAdjacencyMatrix() const;
 
     virtual void loadFromFile(const std::string& filename) = 0;
     virtual void print(std::ostream& out) const;

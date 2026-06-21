@@ -6,18 +6,18 @@ TreeFun3Iterator::TreeFun3Iterator(TreeNode* root) {
 
 void TreeFun3Iterator::pushLeft(TreeNode* node) {
     while (node != nullptr) {
-        stack.push_back(node);
+        stack.push(node);
         node = node->getLeft();
     }
 }
 
 bool TreeFun3Iterator::hasNext() const {
-    return !stack.empty();
+    return !stack.isEmpty();
 }
 
 int TreeFun3Iterator::next() {
-    TreeNode* node = stack.back();
-    stack.pop_back();
+    TreeNode* node = stack.top();
+    stack.pop();
     int value = node->getValue();
     pushLeft(node->getRight());
     return value;

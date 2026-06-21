@@ -1,12 +1,12 @@
 #pragma once
-#include <vector>
+#include "DynamicArray.h"
 #include <string>
 
 class InputHandler {
 public:
-    static std::vector<int> inputBinaryDataFromConsole();
-    static std::vector<int> inputBinaryDataFromFile(const std::string& filename);
-    static std::vector<int> generateRandomBinaryData(int count);
+    static DynamicArray<int> inputBinaryDataFromConsole();
+    static DynamicArray<int> inputBinaryDataFromFile(const std::string& filename);
+    static DynamicArray<int> generateRandomBinaryData(int count);
 
     static std::string inputTextFromConsole();
     static std::string inputTextFromFile(const std::string& filename);

@@ -1,12 +1,12 @@
 #pragma once
-#include <vector>
+#include "DynamicArray.h"
 #include <string>
 
 class InputHandler {
 public:
-    static std::vector<int> inputFromConsole();
-    static std::vector<int> inputFromFile(const std::string& filename);
-    static std::vector<int> generateRandom(int count);
+    static DynamicArray<int> inputFromConsole();
+    static DynamicArray<int> inputFromFile(const std::string& filename);
+    static DynamicArray<int> generateRandom(int count);
 
     static int readValidInteger(const std::string& prompt);
     static int readValidPositiveInteger(const std::string& prompt);

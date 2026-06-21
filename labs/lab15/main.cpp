@@ -6,8 +6,8 @@
 #include "Line.h"
 #include "Student.h"
 #include "InputHandler.h"
+#include "Validator.h"
 #include <iostream>
-#include <vector>
 #include <stdexcept>
 
 void demonstrateTask1() {
@@ -48,7 +48,12 @@ void demonstrateTask2() {
 void demonstrateTask3() {
     std::cout << "\n=== Задача 3: Студент ===" << std::endl;
 
-    Student vasya("Вася", {3, 4, 5});
+    DynamicArray<int> vasyaGrades;
+    vasyaGrades.pushBack(3);
+    vasyaGrades.pushBack(4);
+    vasyaGrades.pushBack(5);
+
+    Student vasya("Вася", vasyaGrades);
     std::cout << "Вася: " << vasya.toString() << std::endl;
 
     Student petya = vasya;
@@ -107,9 +112,7 @@ void interactivePointDemo() {
                 point = InputHandler::inputPointFromConsole();
                 break;
             case 2: {
-                std::string filename;
-                std::cout << "Введите имя файла: ";
-                std::cin >> filename;
+                std::string filename = InputHandler::readValidFilename("Введите имя файла: ");
                 point = InputHandler::inputPointFromFile(filename);
                 break;
             }
@@ -146,9 +149,7 @@ void interactiveLineDemo() {
                 line = InputHandler::inputLineFromConsole();
                 break;
             case 2: {
-                std::string filename;
-                std::cout << "Введите имя файла: ";
-                std::cin >> filename;
+                std::string filename = InputHandler::readValidFilename("Введите имя файла: ");
                 line = InputHandler::inputLineFromFile(filename);
                 break;
             }
@@ -186,9 +187,7 @@ void interactiveStudentDemo() {
                 student = InputHandler::inputStudentFromConsole();
                 break;
             case 2: {
-                std::string filename;
-                std::cout << "Введите имя файла: ";
-                std::cin >> filename;
+                std::string filename = InputHandler::readValidFilename("Введите имя файла: ");
                 student = InputHandler::inputStudentFromFile(filename);
                 break;
             }
@@ -213,14 +212,16 @@ int main() {
     SetConsoleCP(CP_UTF8);
 #endif
 
+    srand(static_cast<unsigned>(time(nullptr)));
+
     int choice;
     do {
         std::cout << "\n========== МЕНЮ ==========" << std::endl;
-        std::cout << "1. Задача 1 (Точка)" << std::endl;
-        std::cout << "2. Задача 2 (Линия)" << std::endl;
-        std::cout << "3. Задача 3 (Студент)" << std::endl;
-        std::cout << "4. Задача 4 (Создаем Точку и Линию)" << std::endl;
-        std::cout << "5. Задача 5 (Длина Линии)" << std::endl;
+        std::cout << "1. Демонстрация Задачи 1 (Точка)" << std::endl;
+        std::cout << "2. Демонстрация Задачи 2 (Линия)" << std::endl;
+        std::cout << "3. Демонстрация Задачи 3 (Студент)" << std::endl;
+        std::cout << "4. Демонстрация Задачи 4 (Создаем Точку и Линию)" << std::endl;
+        std::cout << "5. Демонстрация Задачи 5 (Длина Линии)" << std::endl;
         std::cout << "6. Интерактивная работа с Точкой" << std::endl;
         std::cout << "7. Интерактивная работа с Линией" << std::endl;
         std::cout << "8. Интерактивная работа со Студентом" << std::endl;
@@ -232,6 +233,11 @@ int main() {
             std::cin.clear();
             std::cin.ignore(10000, '\n');
             std::cout << "Некорректный ввод. Попробуйте снова." << std::endl;
+            continue;
+        }
+
+        if (!Validator::isValidMenuChoice(choice, 8)) {
+            std::cout << "Неверный пункт меню. Попробуйте снова." << std::endl;
             continue;
         }
 
@@ -262,9 +268,6 @@ int main() {
                 break;
             case 0:
                 std::cout << "Выход из программы..." << std::endl;
-                break;
-            default:
-                std::cout << "Неверный пункт меню. Попробуйте снова." << std::endl;
                 break;
         }
     } while (choice != 0);

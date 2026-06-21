@@ -1,22 +1,22 @@
 #pragma once
 #include <string>
-#include <vector>
+#include "DynamicArray.h"
 
 class Student {
 private:
     std::string name;
-    std::vector<int> grades;
+    DynamicArray<int> grades;
 
 public:
     Student(const std::string& name);
-    Student(const std::string& name, const std::vector<int>& grades);
+    Student(const std::string& name, const DynamicArray<int>& grades);
     Student();
-    
+
     std::string getName() const;
-    const std::vector<int>& getGrades() const;
+    const DynamicArray<int>& getGrades() const;
     void setName(const std::string& name);
-    void setGrades(const std::vector<int>& grades);
-    void setGrade(size_t index, int grade);
-    
+    void setGrades(const DynamicArray<int>& grades);
+    void setGrade(int index, int grade);
+
     std::string toString() const;
 };

@@ -1,10 +1,9 @@
 #include "Line.h"
 #include <cmath>
-#include <sstream>
 
 Line::Line(const Point& start, const Point& end) : start(start), end(end) {}
 
-Line::Line(double x1, double y1, double x2, double y2) 
+Line::Line(double x1, double y1, double x2, double y2)
     : start(Point(x1, y1)), end(Point(x2, y2)) {}
 
 Line::Line() : start(Point()), end(Point()) {}

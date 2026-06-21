@@ -19,4 +19,9 @@ add_executable(lab18 main.cpp
         Validator.h
         Validator.cpp
         InputHandler.h
-        InputHandler.cpp)
+        InputHandler.cpp
+        DynamicArray.h
+        Stack.h
+        Queue.h
+        Map.h
+        Set.h)

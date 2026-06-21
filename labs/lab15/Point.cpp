@@ -1,6 +1,7 @@
 #include "Point.h"
 #include <cmath>
 #include <sstream>
+#include <iomanip>
 
 Point::Point(double x, double y) : x(x), y(y) {}
 
@@ -24,6 +25,7 @@ void Point::setY(double y) {
 
 std::string Point::toString() const {
     std::ostringstream oss;
+    oss << std::setprecision(2) << std::fixed;
     oss << "{" << x << ";" << y << "}";
     return oss.str();
 }

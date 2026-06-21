@@ -15,4 +15,6 @@ add_executable(lab19 main.cpp
         Validator.h
         Validator.cpp
         InputHandler.h
-        InputHandler.cpp)
+        InputHandler.cpp
+        DynamicArray.h
+        PriorityQueue.h)

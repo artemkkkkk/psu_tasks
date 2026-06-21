@@ -1,11 +1,11 @@
 #pragma once
-#include <vector>
+#include "DynamicArray.h"
 #include <string>
 
 class HammingCode {
 private:
-    std::vector<int> data;
-    std::vector<int> encoded;
+    DynamicArray<int> data;
+    DynamicArray<int> encoded;
     int parityBitsCount;
 
     int calculateParityBitsCount(int dataSize) const;
@@ -14,14 +14,14 @@ private:
 
 public:
     HammingCode();
-    HammingCode(const std::vector<int>& data);
+    HammingCode(const DynamicArray<int>& data);
 
-    void setData(const std::vector<int>& data);
+    void setData(const DynamicArray<int>& data);
     void encode();
     void decode();
 
-    const std::vector<int>& getData() const;
-    const std::vector<int>& getEncoded() const;
+    const DynamicArray<int>& getData() const;
+    const DynamicArray<int>& getEncoded() const;
 
     void introduceError(int position);
     bool hasError() const;

@@ -1,13 +1,19 @@
 #include "HuffmanCode.h"
-#include <iostream>
-#include <queue>
+#include "PriorityQueue.h"
 #include <stdexcept>
-#include <functional>
+
+int compareHuffmanNodes(HuffmanNode* const& a, HuffmanNode* const& b) {
+    if (a->frequency != b->frequency) {
+        return a->frequency - b->frequency;
+    }
+    return static_cast<int>(a->character) - static_cast<int>(b->character);
+}
 
 HuffmanCode::HuffmanCode() : root(nullptr) {}
 
-HuffmanCode::HuffmanCode(const HuffmanCode& other) : root(copyTree(other.root)), codes(other.codes),
-    frequencies(other.frequencies), originalText(other.originalText), encodedText(other.encodedText) {}
+HuffmanCode::HuffmanCode(const HuffmanCode& other)
+    : root(copyTree(other.root)), codes(other.codes), frequencies(other.frequencies),
+      originalText(other.originalText), encodedText(other.encodedText) {}
 
 HuffmanCode& HuffmanCode::operator=(const HuffmanCode& other) {
     if (this != &other) {
@@ -45,23 +51,56 @@ HuffmanNode* HuffmanCode::copyTree(HuffmanNode* node) {
 
 void HuffmanCode::setText(const std::string& text) {
     originalText = text;
-    frequencies.clear();
-    for (char c : text) {
-        frequencies[c]++;
+    frequencies = DynamicArray<CodeEntry>();
+    for (size_t i = 0; i < text.length(); ++i) {
+        char c = text[i];
+        int idx = findFrequencyIndex(c);
+        if (idx == -1) {
+            frequencies.pushBack(CodeEntry(c, "1"));
+        } else {
+            int currentCount = 0;
+            for (size_t j = 0; j < frequencies[idx].code.length(); ++j) {
+                currentCount++;
+            }
+            std::string newCount;
+            for (int k = 0; k < currentCount + 1; ++k) {
+                newCount += "1";
+            }
+            frequencies[idx].code = newCount;
+        }
+    }
+    for (int i = 0; i < frequencies.getSize(); ++i) {
+        frequencies[i].code = std::to_string(frequencies[i].code.length());
     }
 }
 
-void HuffmanCode::buildTree() {
-    auto cmp = [](HuffmanNode* left, HuffmanNode* right) {
-        return left->frequency > right->frequency;
-    };
-    std::priority_queue<HuffmanNode*, std::vector<HuffmanNode*>, decltype(cmp)> pq(cmp);
+int HuffmanCode::findFrequencyIndex(char c) const {
+    for (int i = 0; i < frequencies.getSize(); ++i) {
+        if (frequencies[i].character == c) {
+            return i;
+        }
+    }
+    return -1;
+}
 
-    for (const auto& pair : frequencies) {
-        pq.push(new HuffmanNode(pair.first, pair.second));
+int HuffmanCode::findCodeIndex(char c) const {
+    for (int i = 0; i < codes.getSize(); ++i) {
+        if (codes[i].character == c) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+void HuffmanCode::buildTree() {
+    PriorityQueue<HuffmanNode*> pq(compareHuffmanNodes);
+
+    for (int i = 0; i < frequencies.getSize(); ++i) {
+        int freq = std::stoi(frequencies[i].code);
+        pq.push(new HuffmanNode(frequencies[i].character, freq));
     }
 
-    while (pq.size() > 1) {
+    while (pq.getSize() > 1) {
         HuffmanNode* left = pq.top();
         pq.pop();
         HuffmanNode* right = pq.top();
@@ -73,7 +112,7 @@ void HuffmanCode::buildTree() {
         pq.push(newNode);
     }
 
-    if (!pq.empty()) {
+    if (!pq.isEmpty()) {
         root = pq.top();
     }
 }
@@ -83,7 +122,7 @@ void HuffmanCode::generateCodes(HuffmanNode* node, const std::string& code) {
         return;
     }
     if (node->isLeaf()) {
-        codes[node->character] = code.empty() ? "0" : code;
+        codes.pushBack(CodeEntry(node->character, code.empty() ? "0" : code));
         return;
     }
     generateCodes(node->left, code + "0");
@@ -93,7 +132,7 @@ void HuffmanCode::generateCodes(HuffmanNode* node, const std::string& code) {
 void HuffmanCode::encode() {
     destroyTree(root);
     root = nullptr;
-    codes.clear();
+    codes = DynamicArray<CodeEntry>();
 
     if (originalText.empty()) {
         return;
@@ -103,8 +142,11 @@ void HuffmanCode::encode() {
     generateCodes(root, "");
 
     encodedText.clear();
-    for (char c : originalText) {
-        encodedText += codes[c];
+    for (size_t i = 0; i < originalText.length(); ++i) {
+        int idx = findCodeIndex(originalText[i]);
+        if (idx != -1) {
+            encodedText += codes[idx].code;
+        }
     }
 }
 
@@ -112,7 +154,8 @@ std::string HuffmanCode::decode(const std::string& encoded) {
     std::string decoded;
     HuffmanNode* current = root;
 
-    for (char bit : encoded) {
+    for (size_t i = 0; i < encoded.length(); ++i) {
+        char bit = encoded[i];
         if (bit == '0') {
             current = current->left;
         } else {
@@ -128,11 +171,11 @@ std::string HuffmanCode::decode(const std::string& encoded) {
     return decoded;
 }
 
-const std::map<char, std::string>& HuffmanCode::getCodes() const {
+const DynamicArray<HuffmanCode::CodeEntry>& HuffmanCode::getCodes() const {
     return codes;
 }
 
-const std::map<char, int>& HuffmanCode::getFrequencies() const {
+const DynamicArray<HuffmanCode::CodeEntry>& HuffmanCode::getFrequencies() const {
     return frequencies;
 }
 
@@ -145,11 +188,11 @@ const std::string& HuffmanCode::getEncodedText() const {
 }
 
 int HuffmanCode::getUniformCodingSize() const {
-    if (frequencies.empty()) {
+    if (frequencies.isEmpty()) {
         return 0;
     }
     int bitsPerChar = 1;
-    while ((1 << bitsPerChar) < frequencies.size()) {
+    while ((1 << bitsPerChar) < frequencies.getSize()) {
         bitsPerChar++;
     }
     return originalText.length() * bitsPerChar;
@@ -161,8 +204,10 @@ int HuffmanCode::getHuffmanCodingSize() const {
 
 void HuffmanCode::printCodes(std::ostream& out) const {
     out << "Коды символов:" << std::endl;
-    for (const auto& pair : codes) {
-        char displayChar = pair.first;
+    for (int i = 0; i < codes.getSize(); ++i) {
+        char displayChar = codes[i].character;
+        int freqIdx = findFrequencyIndex(displayChar);
+        std::string freqStr = (freqIdx != -1) ? frequencies[freqIdx].code : "?";
         if (displayChar == ' ') {
             out << "' ' (пробел)";
         } else if (displayChar == '\n') {
@@ -170,7 +215,7 @@ void HuffmanCode::printCodes(std::ostream& out) const {
         } else {
             out << "'" << displayChar << "'";
         }
-        out << ": " << pair.second << " (частота: " << frequencies.at(pair.first) << ")" << std::endl;
+        out << ": " << codes[i].code << " (частота: " << freqStr << ")" << std::endl;
     }
 }
 

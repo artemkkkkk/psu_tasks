@@ -9,6 +9,7 @@
 #include <iostream>
 #include <fstream>
 #include <stdexcept>
+#include <ctime>
 
 std::string getInputExpression(const std::string& taskName) {
     std::cout << "\n=== Ввод данных для " << taskName << " ===" << std::endl;
@@ -114,6 +115,8 @@ int main() {
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
 #endif
+
+    srand(static_cast<unsigned>(time(nullptr)));
 
     int choice;
     do {

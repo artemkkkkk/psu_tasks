@@ -1,16 +1,7 @@
 #include "Validator.h"
-#include <cctype>
 
-bool Validator::isValidBinaryString(const std::string& input) {
-    if (input.empty()) {
-        return false;
-    }
-    for (char c : input) {
-        if (c != '0' && c != '1' && c != ' ') {
-            return false;
-        }
-    }
-    return true;
+bool Validator::isValidBinaryBit(int bit) {
+    return bit == 0 || bit == 1;
 }
 
 bool Validator::isValidText(const std::string& input) {
@@ -21,8 +12,8 @@ bool Validator::isValidKey(const std::string& input) {
     if (input.empty()) {
         return false;
     }
-    for (char c : input) {
-        if (!std::isalpha(c)) {
+    for (size_t i = 0; i < input.length(); ++i) {
+        if (!std::isalpha(input[i])) {
             return false;
         }
     }
@@ -33,7 +24,8 @@ bool Validator::isValidFilename(const std::string& filename) {
     if (filename.empty()) {
         return false;
     }
-    for (char c : filename) {
+    for (size_t i = 0; i < filename.length(); ++i) {
+        char c = filename[i];
         if (c == '<' || c == '>' || c == ':' || c == '"' || c == '|' || c == '?' || c == '*') {
             return false;
         }
@@ -51,4 +43,13 @@ bool Validator::isValidPosition(int position, int maxSize) {
 
 bool Validator::isNotEmpty(const std::string& input) {
     return !input.empty();
+}
+
+bool Validator::isValidBinaryData(const DynamicArray<int>& data) {
+    for (int i = 0; i < data.getSize(); ++i) {
+        if (!isValidBinaryBit(data[i])) {
+            return false;
+        }
+    }
+    return !data.isEmpty();
 }

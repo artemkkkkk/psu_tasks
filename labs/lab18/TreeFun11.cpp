@@ -1,38 +1,41 @@
 #include "TreeFun11.h"
-#include <queue>
-#include <set>
+#include "Map.h"
+#include "Queue.h"
+#include "Set.h"
 #include <stdexcept>
 
-void TreeFun11::buildParentMap(TreeNode* node, TreeNode* parent, std::map<TreeNode*, TreeNode*>& parentMap) {
+void TreeFun11::buildParentMap(TreeNode* node, TreeNode* parent, Map<TreeNode*, TreeNode*>& parentMap) {
     if (node == nullptr) {
         return;
     }
-    parentMap[node] = parent;
+    parentMap.put(node, parent);
     buildParentMap(node->getLeft(), node, parentMap);
     buildParentMap(node->getRight(), node, parentMap);
 }
 
-std::vector<TreeNode*> TreeFun11::getNeighbors(TreeNode* node, const std::map<TreeNode*, TreeNode*>& parentMap) {
-    std::vector<TreeNode*> neighbors;
+DynamicArray<TreeNode*> TreeFun11::getNeighbors(TreeNode* node, const Map<TreeNode*, TreeNode*>& parentMap) {
+    DynamicArray<TreeNode*> neighbors;
     if (node->getLeft() != nullptr) {
-        neighbors.push_back(node->getLeft());
+        neighbors.pushBack(node->getLeft());
     }
     if (node->getRight() != nullptr) {
-        neighbors.push_back(node->getRight());
+        neighbors.pushBack(node->getRight());
     }
-    auto it = parentMap.find(node);
-    if (it != parentMap.end() && it->second != nullptr) {
-        neighbors.push_back(it->second);
+    if (parentMap.contains(node)) {
+        TreeNode* parent = parentMap.get(node);
+        if (parent != nullptr) {
+            neighbors.pushBack(parent);
+        }
     }
     return neighbors;
 }
 
 TreeNode* TreeFun11::findNode(int value) const {
-    std::queue<TreeNode*> q;
+    Queue<TreeNode*> q;
     if (root != nullptr) {
         q.push(root);
     }
-    while (!q.empty()) {
+    while (!q.isEmpty()) {
         TreeNode* current = q.front();
         q.pop();
         if (current->getValue() == value) {
@@ -48,47 +51,48 @@ TreeNode* TreeFun11::findNode(int value) const {
     return nullptr;
 }
 
-std::vector<std::vector<int>> TreeFun11::simulateFire(TreeNode* startNode) {
-    std::vector<std::vector<int>> result;
+DynamicArray<DynamicArray<int>> TreeFun11::simulateFire(TreeNode* startNode) {
+    DynamicArray<DynamicArray<int>> result;
     if (startNode == nullptr) {
         return result;
     }
-    std::map<TreeNode*, TreeNode*> parentMap;
+    Map<TreeNode*, TreeNode*> parentMap;
     buildParentMap(root, nullptr, parentMap);
-    std::set<TreeNode*> visited;
-    std::queue<TreeNode*> q;
+    Set<TreeNode*> visited;
+    Queue<TreeNode*> q;
     q.push(startNode);
     visited.insert(startNode);
-    while (!q.empty()) {
-        int levelSize = q.size();
-        std::vector<int> currentLevel;
+    while (!q.isEmpty()) {
+        int levelSize = q.getSize();
+        DynamicArray<int> currentLevel;
         for (int i = 0; i < levelSize; ++i) {
             TreeNode* current = q.front();
             q.pop();
-            currentLevel.push_back(current->getValue());
-            std::vector<TreeNode*> neighbors = getNeighbors(current, parentMap);
-            for (TreeNode* neighbor : neighbors) {
-                if (visited.find(neighbor) == visited.end()) {
+            currentLevel.pushBack(current->getValue());
+            DynamicArray<TreeNode*> neighbors = getNeighbors(current, parentMap);
+            for (int j = 0; j < neighbors.getSize(); ++j) {
+                TreeNode* neighbor = neighbors[j];
+                if (!visited.contains(neighbor)) {
                     visited.insert(neighbor);
                     q.push(neighbor);
                 }
             }
         }
-        result.push_back(currentLevel);
+        result.pushBack(currentLevel);
     }
     return result;
 }
 
-std::vector<int> TreeFun11::getFireOrder(int startValue) {
+DynamicArray<int> TreeFun11::getFireOrder(int startValue) {
     TreeNode* startNode = findNode(startValue);
     if (startNode == nullptr) {
-        throw std::runtime_error("Узел с значением " + std::to_string(startValue) + " не найден");
+        throw std::runtime_error("Узел с значением не найден");
     }
-    std::vector<std::vector<int>> levels = simulateFire(startNode);
-    std::vector<int> order;
-    for (const auto& level : levels) {
-        for (int value : level) {
-            order.push_back(value);
+    DynamicArray<DynamicArray<int>> levels = simulateFire(startNode);
+    DynamicArray<int> order;
+    for (int i = 0; i < levels.getSize(); ++i) {
+        for (int j = 0; j < levels[i].getSize(); ++j) {
+            order.pushBack(levels[i][j]);
         }
     }
     return order;

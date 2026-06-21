@@ -1,10 +1,10 @@
 #pragma once
 #include "BinaryTree.h"
-#include <vector>
+#include "Stack.h"
 
 class TreeFun3Iterator {
 private:
-    std::vector<TreeNode*> stack;
+    Stack<TreeNode*> stack;
 
     void pushLeft(TreeNode* node);
 

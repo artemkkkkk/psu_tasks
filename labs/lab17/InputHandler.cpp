@@ -2,7 +2,8 @@
 #include "Validator.h"
 #include <iostream>
 #include <fstream>
-#include <random>
+#include <cstdlib>
+#include <ctime>
 #include <stdexcept>
 #include <sstream>
 
@@ -18,7 +19,7 @@ int InputHandler::readValidInteger(const std::string& prompt) {
             continue;
         }
         if (Validator::isValidInteger(input)) {
-            return std::stoi(input);
+            return std::atoi(input.c_str());
         }
         std::cout << "Некорректное целое число. Попробуйте снова." << std::endl;
     }
@@ -61,13 +62,13 @@ std::string InputHandler::inputExpressionFromFile(const std::string& filename) {
 }
 
 std::string InputHandler::generateRandomExpression() {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> numDis(1, 9);
-    std::uniform_int_distribution<> opDis(0, 2);
-    std::string ops[] = {"+", "-", "*"};
-    
     std::ostringstream oss;
-    oss << numDis(gen) << " " << numDis(gen) << " " << ops[opDis(gen)] << " " << numDis(gen) << " " << ops[opDis(gen)];
+    int num1 = rand() % 9 + 1;
+    int num2 = rand() % 9 + 1;
+    int num3 = rand() % 9 + 1;
+    const char* ops[] = {"+", "-", "*"};
+    int op1 = rand() % 3;
+    int op2 = rand() % 3;
+    oss << num1 << " " << num2 << " " << ops[op1] << " " << num3 << " " << ops[op2];
     return oss.str();
 }

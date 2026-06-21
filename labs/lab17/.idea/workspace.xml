@@ -3,9 +3,13 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
-  <component name="CMakePresetLoader"><![CDATA[{
-  "useNewFormat": true
-}]]></component>
+  <component name="BackendCodeEditorMiscSettings">
+    <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
+    <option name="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue" value="true" type="bool" />
+  </component>
+  <component name="CMakePresetLoader">{
+  &quot;useNewFormat&quot;: true
+}</component>
   <component name="CMakeProjectFlavorService">
     <option name="flavorId" value="CMakePlainProjectFlavor" />
   </component>
@@ -24,138 +28,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac04a740-0e05-468a-baf8-8612298eee98" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../lab11/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../lab11/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab16/task1/.idea/editor.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab16/task1/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab16/task1/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab16/task1/.idea/task1.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab16/task1/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab16/task1/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab16/task1/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab16/task1/main.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab16/task2/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab16/task2/.idea/editor.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab16/task2/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab16/task2/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab16/task2/.idea/task2.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab16/task2/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab16/task2/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab16/task2/main.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab16/task3/.idea/editor.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab16/task3/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab16/task3/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab16/task3/.idea/task3.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab16/task3/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab16/task3/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab16/task3/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab16/task3/main.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task1/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task1/.idea/editor.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task1/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task1/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task1/.idea/task1.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task1/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task1/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task1/main.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task2/.idea/editor.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task2/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task2/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task2/.idea/task2.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task2/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task2/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task2/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task2/main.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab18/task1/.idea/editor.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab18/task1/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab18/task1/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab18/task1/.idea/task1.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab18/task1/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab18/task1/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab18/task1/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab18/task1/main.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab18/task2/.idea/editor.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab18/task2/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab18/task2/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab18/task2/.idea/task2.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab18/task2/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab18/task2/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab18/task2/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab18/task2/main.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab18/task3/.idea/editor.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab18/task3/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab18/task3/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab18/task3/.idea/task3.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab18/task3/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab18/task3/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab18/task3/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab18/task3/main.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab19/task1/.idea/editor.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab19/task1/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab19/task1/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab19/task1/.idea/task1.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab19/task1/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab19/task1/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab19/task1/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab19/task1/main.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab19/task2/.idea/editor.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab19/task2/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab19/task2/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab19/task2/.idea/task2.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab19/task2/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab19/task2/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab19/task2/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab19/task2/main.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab19/task3/.idea/editor.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab19/task3/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab19/task3/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab19/task3/.idea/task3.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab19/task3/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab19/task3/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab19/task3/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab19/task3/main.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab20/task1/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab20/task1/.idea/editor.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab20/task1/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab20/task1/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab20/task1/.idea/task1.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab20/task1/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab20/task1/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab20/task1/main.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab20/task2/.idea/editor.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab20/task2/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab20/task2/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab20/task2/.idea/task2.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab20/task2/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab20/task2/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab20/task2/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab20/task2/main.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab21/graf1/.idea/editor.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab21/graf1/.idea/graf1.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab21/graf1/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab21/graf1/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab21/graf1/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab21/graf1/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab21/graf1/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab21/graf1/input.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab21/graf1/main.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab21/graf4/.idea/editor.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab21/graf4/.idea/graf4.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab21/graf4/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab21/graf4/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab21/graf4/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab21/graf4/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab21/graf4/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab21/graf4/input.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab21/graf4/main.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab21/graf8/.idea/editor.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab21/graf8/.idea/graf8.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab21/graf8/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab21/graf8/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab21/graf8/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab21/graf8/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab21/graf8/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab21/graf8/input.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab21/graf8/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab15/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../lab15/.idea/editor.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab15/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../lab15/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab15/InputHandler.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../lab15/InputHandler.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab15/InputHandler.h" beforeDir="false" afterPath="$PROJECT_DIR$/../lab15/InputHandler.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab15/Line.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../lab15/Line.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab15/Line.h" beforeDir="false" afterPath="$PROJECT_DIR$/../lab15/Line.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab15/Point.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../lab15/Point.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab15/Point.h" beforeDir="false" afterPath="$PROJECT_DIR$/../lab15/Point.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab15/Student.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../lab15/Student.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab15/Student.h" beforeDir="false" afterPath="$PROJECT_DIR$/../lab15/Student.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab15/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../lab15/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab16/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../lab16/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab16/BinaryTree.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../lab16/BinaryTree.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab16/BinaryTree.h" beforeDir="false" afterPath="$PROJECT_DIR$/../lab16/BinaryTree.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab16/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../lab16/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab16/InputHandler.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../lab16/InputHandler.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab16/InputHandler.h" beforeDir="false" afterPath="$PROJECT_DIR$/../lab16/InputHandler.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab16/TreeNode.h" beforeDir="false" afterPath="$PROJECT_DIR$/../lab16/TreeNode.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab16/Validator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../lab16/Validator.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab16/Validator.h" beforeDir="false" afterPath="$PROJECT_DIR$/../lab16/Validator.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab16/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../lab16/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExpressionTree.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ExpressionTree.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExpressionTree.h" beforeDir="false" afterPath="$PROJECT_DIR$/ExpressionTree.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InputHandler.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/InputHandler.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,40 +73,40 @@
     <option name="minorVersion" value="2.2" />
     <option name="productBranch" value="Classic" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="3FHUVBq01hZMQu0UHDLRIsrHUlE" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "CMake Application.lab17.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.RadMigrateCodeStyle": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "RunOnceActivity.west.config.association.type.startup.service": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "C:/Users/t0pch/CLionProjects/psu_tasks/labs/lab17/main.cpp",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;CMake Application.lab17.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.west.config.association.type.startup.service&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/t0pch/CLionProjects/psu_tasks/labs/lab17/main.cpp&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
     <configuration name="lab17" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="lab17" TARGET_NAME="lab17" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="lab17" RUN_TARGET_NAME="lab17">
@@ -225,6 +123,7 @@
       <option name="presentableId" value="Default" />
       <updated>1781731509928</updated>
       <workItem from="1781731511033" duration="723000" />
+      <workItem from="1782075314979" duration="745000" />
     </task>
     <servers />
   </component>

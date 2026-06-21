@@ -2,7 +2,8 @@
 #include "Validator.h"
 #include <iostream>
 #include <fstream>
-#include <random>
+#include <cstdlib>
+#include <ctime>
 #include <stdexcept>
 
 int InputHandler::readValidInteger(const std::string& prompt) {
@@ -17,7 +18,7 @@ int InputHandler::readValidInteger(const std::string& prompt) {
             continue;
         }
         if (Validator::isValidInteger(input)) {
-            return std::stoi(input);
+            return std::atoi(input.c_str());
         }
         std::cout << "Некорректное целое число. Попробуйте снова." << std::endl;
     }
@@ -35,7 +36,7 @@ int InputHandler::readValidPositiveInteger(const std::string& prompt) {
             continue;
         }
         if (Validator::isValidPositiveInteger(input)) {
-            return std::stoi(input);
+            return std::atoi(input.c_str());
         }
         std::cout << "Некорректное положительное целое число. Попробуйте снова." << std::endl;
     }
@@ -53,39 +54,36 @@ std::string InputHandler::readValidFilename(const std::string& prompt) {
     }
 }
 
-std::vector<int> InputHandler::inputFromConsole() {
+DynamicArray<int> InputHandler::inputFromConsole() {
     int count = readValidPositiveInteger("Введите количество элементов дерева: ");
-    std::vector<int> values;
+    DynamicArray<int> values;
     for (int i = 0; i < count; ++i) {
         int value = readValidInteger("Введите значение элемента " + std::to_string(i + 1) + ": ");
-        values.push_back(value);
+        values.pushBack(value);
     }
     return values;
 }
 
-std::vector<int> InputHandler::inputFromFile(const std::string& filename) {
+DynamicArray<int> InputHandler::inputFromFile(const std::string& filename) {
     std::ifstream file(filename);
     if (!file.is_open()) {
         throw std::runtime_error("Не удалось открыть файл: " + filename);
     }
-    std::vector<int> values;
+    DynamicArray<int> values;
     int value;
     while (file >> value) {
-        values.push_back(value);
+        values.pushBack(value);
     }
-    if (values.empty()) {
+    if (values.isEmpty()) {
         throw std::runtime_error("Файл пуст или содержит некорректные данные");
     }
     return values;
 }
 
-std::vector<int> InputHandler::generateRandom(int count) {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(1, 100);
-    std::vector<int> values;
+DynamicArray<int> InputHandler::generateRandom(int count) {
+    DynamicArray<int> values;
     for (int i = 0; i < count; ++i) {
-        values.push_back(dis(gen));
+        values.pushBack(rand() % 100 + 1);
     }
     return values;
 }

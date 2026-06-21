@@ -1,9 +1,8 @@
 #include "DirectedGraph.h"
+#include "Queue.h"
 #include <fstream>
-#include <random>
+#include <cstdlib>
 #include <stdexcept>
-#include <algorithm>
-#include <set>
 
 DirectedGraph::DirectedGraph() : Graph() {}
 
@@ -19,7 +18,7 @@ void DirectedGraph::loadFromFile(const std::string& filename) {
         throw std::runtime_error("Некорректное количество вершин");
     }
     vertexCount = n;
-    adjacencyMatrix.assign(n, std::vector<int>(n, 0));
+    initializeMatrix(n);
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n; ++j) {
             if (!(file >> adjacencyMatrix[i][j])) {
@@ -37,7 +36,7 @@ void DirectedGraph::loadFromConsole() {
         throw std::invalid_argument("Количество вершин должно быть положительным");
     }
     vertexCount = n;
-    adjacencyMatrix.assign(n, std::vector<int>(n, 0));
+    initializeMatrix(n);
     std::cout << "Введите матрицу смежности (" << n << "x" << n << "):" << std::endl;
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n; ++j) {
@@ -51,41 +50,56 @@ void DirectedGraph::generateRandom(int vertexCount, double density) {
         throw std::invalid_argument("Количество вершин должно быть положительным");
     }
     this->vertexCount = vertexCount;
-    adjacencyMatrix.assign(vertexCount, std::vector<int>(vertexCount, 0));
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution<> dis(0.0, 1.0);
-    std::uniform_int_distribution<> weightDis(1, 10);
+    initializeMatrix(vertexCount);
     for (int i = 0; i < vertexCount; ++i) {
         for (int j = 0; j < vertexCount; ++j) {
-            if (i != j && dis(gen) < density) {
-                adjacencyMatrix[i][j] = weightDis(gen);
+            if (i != j) {
+                double r = static_cast<double>(rand()) / RAND_MAX;
+                if (r < density) {
+                    adjacencyMatrix[i][j] = (rand() % 10) + 1;
+                }
             }
         }
     }
 }
 
-std::vector<int> DirectedGraph::bfs(int startVertex) const {
+void DirectedGraph::sortVertices(DynamicArray<int>& vertices) const {
+    for (int i = 0; i < vertices.getSize() - 1; ++i) {
+        for (int j = 0; j < vertices.getSize() - i - 1; ++j) {
+            if (vertices[j] > vertices[j + 1]) {
+                int temp = vertices[j];
+                vertices[j] = vertices[j + 1];
+                vertices[j + 1] = temp;
+            }
+        }
+    }
+}
+
+DynamicArray<int> DirectedGraph::bfs(int startVertex) const {
     if (startVertex < 0 || startVertex >= vertexCount) {
         throw std::out_of_range("Неверный номер стартовой вершины");
     }
-    std::vector<int> result;
-    std::vector<bool> visited(vertexCount, false);
-    std::queue<int> q;
+    DynamicArray<int> result;
+    DynamicArray<bool> visited;
+    for (int i = 0; i < vertexCount; ++i) {
+        visited.pushBack(false);
+    }
+    Queue<int> q;
     q.push(startVertex);
     visited[startVertex] = true;
-    while (!q.empty()) {
+    while (!q.isEmpty()) {
         int current = q.front();
         q.pop();
-        result.push_back(current);
-        std::vector<int> neighbors;
+        result.pushBack(current);
+        DynamicArray<int> neighbors;
         for (int i = 0; i < vertexCount; ++i) {
             if (adjacencyMatrix[current][i] != 0 && !visited[i]) {
-                neighbors.push_back(i);
+                neighbors.pushBack(i);
             }
         }
-        std::sort(neighbors.begin(), neighbors.end());
-        for (int neighbor : neighbors) {
+        sortVertices(neighbors);
+        for (int i = 0; i < neighbors.getSize(); ++i) {
+            int neighbor = neighbors[i];
             visited[neighbor] = true;
             q.push(neighbor);
         }
@@ -93,25 +107,29 @@ std::vector<int> DirectedGraph::bfs(int startVertex) const {
     return result;
 }
 
-std::vector<int> DirectedGraph::bfsWithLevels(int startVertex) const {
+DynamicArray<int> DirectedGraph::bfsWithLevels(int startVertex) const {
     if (startVertex < 0 || startVertex >= vertexCount) {
         throw std::out_of_range("Неверный номер стартовой вершины");
     }
-    std::vector<int> distances(vertexCount, -1);
-    std::queue<int> q;
+    DynamicArray<int> distances;
+    for (int i = 0; i < vertexCount; ++i) {
+        distances.pushBack(-1);
+    }
+    Queue<int> q;
     q.push(startVertex);
     distances[startVertex] = 0;
-    while (!q.empty()) {
+    while (!q.isEmpty()) {
         int current = q.front();
         q.pop();
-        std::vector<int> neighbors;
+        DynamicArray<int> neighbors;
         for (int i = 0; i < vertexCount; ++i) {
             if (adjacencyMatrix[current][i] != 0 && distances[i] == -1) {
-                neighbors.push_back(i);
+                neighbors.pushBack(i);
             }
         }
-        std::sort(neighbors.begin(), neighbors.end());
-        for (int neighbor : neighbors) {
+        sortVertices(neighbors);
+        for (int i = 0; i < neighbors.getSize(); ++i) {
+            int neighbor = neighbors[i];
             distances[neighbor] = distances[current] + 1;
             q.push(neighbor);
         }
@@ -119,36 +137,37 @@ std::vector<int> DirectedGraph::bfsWithLevels(int startVertex) const {
     return distances;
 }
 
-std::vector<int> DirectedGraph::findCitiesWithMinTransfers(int startCity, int minTransfers) const {
+DynamicArray<int> DirectedGraph::findCitiesWithMinTransfers(int startCity, int minTransfers) const {
     if (startCity < 0 || startCity >= vertexCount) {
         throw std::out_of_range("Неверный номер стартового города");
     }
     if (minTransfers < 0) {
         throw std::invalid_argument("Количество пересадок не может быть отрицательным");
     }
-    std::vector<int> distances = bfsWithLevels(startCity);
-    std::vector<int> result;
+    DynamicArray<int> distances = bfsWithLevels(startCity);
+    DynamicArray<int> result;
     int minEdges = minTransfers + 1;
     for (int i = 0; i < vertexCount; ++i) {
         if (i != startCity && distances[i] >= minEdges) {
-            result.push_back(i);
+            result.pushBack(i);
         }
     }
     return result;
 }
 
 void DirectedGraph::printBfsResult(std::ostream& out, int startVertex) const {
-    std::vector<int> result = bfs(startVertex);
+    DynamicArray<int> result = bfs(startVertex);
     out << "Поиск в ширину от вершины " << (startVertex + 1) << ":" << std::endl;
     out << "Порядок обхода: ";
-    for (size_t i = 0; i < result.size(); ++i) {
+    for (int i = 0; i < result.getSize(); ++i) {
         out << (result[i] + 1);
-        if (i < result.size() - 1) out << " -> ";
+        if (i < result.getSize() - 1) out << " -> ";
     }
     out << std::endl;
     out << "Достигаемые вершины: ";
     bool first = true;
-    for (int v : result) {
+    for (int i = 0; i < result.getSize(); ++i) {
+        int v = result[i];
         if (v != startVertex) {
             if (!first) out << ", ";
             out << (v + 1);
@@ -160,14 +179,14 @@ void DirectedGraph::printBfsResult(std::ostream& out, int startVertex) const {
 }
 
 void DirectedGraph::printTransfersResult(std::ostream& out, int startCity, int minTransfers) const {
-    std::vector<int> result = findCitiesWithMinTransfers(startCity, minTransfers);
+    DynamicArray<int> result = findCitiesWithMinTransfers(startCity, minTransfers);
     out << "Города, до которых можно долететь не менее чем с " << minTransfers << " пересадками:" << std::endl;
-    if (result.empty()) {
+    if (result.isEmpty()) {
         out << "-1" << std::endl;
     } else {
-        for (size_t i = 0; i < result.size(); ++i) {
+        for (int i = 0; i < result.getSize(); ++i) {
             out << (result[i] + 1);
-            if (i < result.size() - 1) out << ", ";
+            if (i < result.getSize() - 1) out << ", ";
         }
         out << std::endl;
     }

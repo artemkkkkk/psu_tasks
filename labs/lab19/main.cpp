@@ -8,8 +8,9 @@
 #include "InputHandler.h"
 #include "Validator.h"
 #include <iostream>
-#include <vector>
+#include <fstream>
 #include <stdexcept>
+#include <ctime>
 
 void task1HammingCode() {
     std::cout << "\n========== Задача 1: Код Хемминга ==========" << std::endl;
@@ -25,7 +26,7 @@ void task1HammingCode() {
         std::cout << "Выберите способ ввода: ";
         std::cin >> choice;
 
-        std::vector<int> data;
+        DynamicArray<int> data;
         switch (choice) {
             case 1:
                 data = InputHandler::inputBinaryDataFromConsole();
@@ -119,8 +120,10 @@ void task2HuffmanCode() {
         std::cout << "\nРазмер при равномерном кодировании: " << huffman.getUniformCodingSize() << " бит" << std::endl;
         std::cout << "Размер при кодировании Хаффмана: " << huffman.getHuffmanCodingSize() << " бит" << std::endl;
 
-        double compression = (1.0 - (double)huffman.getHuffmanCodingSize() / huffman.getUniformCodingSize()) * 100;
-        std::cout << "Степень сжатия: " << compression << "%" << std::endl;
+        if (huffman.getUniformCodingSize() > 0) {
+            double compression = (1.0 - static_cast<double>(huffman.getHuffmanCodingSize()) / huffman.getUniformCodingSize()) * 100;
+            std::cout << "Степень сжатия: " << compression << "%" << std::endl;
+        }
 
         std::string decoded = huffman.decode(huffman.getEncodedText());
         std::cout << "\nДекодированный текст: " << decoded << std::endl;
@@ -212,6 +215,8 @@ int main() {
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
 #endif
+
+    srand(static_cast<unsigned>(time(nullptr)));
 
     int choice;
     do {

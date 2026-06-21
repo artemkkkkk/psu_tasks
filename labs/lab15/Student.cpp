@@ -3,7 +3,7 @@
 
 Student::Student(const std::string& name) : name(name) {}
 
-Student::Student(const std::string& name, const std::vector<int>& grades) 
+Student::Student(const std::string& name, const DynamicArray<int>& grades)
     : name(name), grades(grades) {}
 
 Student::Student() : name("") {}
@@ -12,7 +12,7 @@ std::string Student::getName() const {
     return name;
 }
 
-const std::vector<int>& Student::getGrades() const {
+const DynamicArray<int>& Student::getGrades() const {
     return grades;
 }
 
@@ -20,12 +20,12 @@ void Student::setName(const std::string& name) {
     this->name = name;
 }
 
-void Student::setGrades(const std::vector<int>& grades) {
+void Student::setGrades(const DynamicArray<int>& grades) {
     this->grades = grades;
 }
 
-void Student::setGrade(size_t index, int grade) {
-    if (index < grades.size()) {
+void Student::setGrade(int index, int grade) {
+    if (index >= 0 && index < grades.getSize()) {
         grades[index] = grade;
     }
 }
@@ -33,9 +33,9 @@ void Student::setGrade(size_t index, int grade) {
 std::string Student::toString() const {
     std::ostringstream oss;
     oss << name << ":[";
-    for (size_t i = 0; i < grades.size(); ++i) {
+    for (int i = 0; i < grades.getSize(); ++i) {
         oss << grades[i];
-        if (i < grades.size() - 1) {
+        if (i < grades.getSize() - 1) {
             oss << ",";
         }
     }

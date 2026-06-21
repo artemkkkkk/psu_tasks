@@ -7,6 +7,7 @@
 #include "Validator.h"
 #include <iostream>
 #include <stdexcept>
+#include <ctime>
 
 Time getInputTime(const std::string& description) {
     std::cout << "\n=== Ввод времени " << description << " ===" << std::endl;
@@ -41,6 +42,39 @@ Time getInputTime(const std::string& description) {
     }
 }
 
+unsigned int getInputMinutes(const std::string& description) {
+    std::cout << "\n=== Ввод количества минут " << description << " ===" << std::endl;
+    std::cout << "1. Ввод из консоли" << std::endl;
+    std::cout << "2. Ввод из файла" << std::endl;
+    std::cout << "3. Случайная генерация" << std::endl;
+    std::cout << "0. Назад" << std::endl;
+
+    int choice;
+    std::cout << "Выберите способ ввода: ";
+    std::cin >> choice;
+
+    if (std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        throw std::invalid_argument("Некорректный ввод");
+    }
+
+    switch (choice) {
+        case 1:
+            return InputHandler::inputMinutesFromConsole("Введите количество минут: ");
+        case 2: {
+            std::string filename = InputHandler::readValidFilename("Введите имя файла: ");
+            return InputHandler::inputMinutesFromFile(filename);
+        }
+        case 3:
+            return InputHandler::generateRandomMinutes();
+        case 0:
+            throw std::runtime_error("Отмена ввода");
+        default:
+            throw std::invalid_argument("Неверный выбор");
+    }
+}
+
 void demonstrateConstructors() {
     std::cout << "\n========== Демонстрация конструкторов ==========" << std::endl;
 
@@ -54,7 +88,7 @@ void demonstrateConstructors() {
     std::cout << "Конструктор (общее количество минут = 150): " << t3 << std::endl;
 
     Time t4(25, 70);
-    std::cout << "Конструктор с нормализацией (25:70 -> 02:10): " << t4 << std::endl;
+    std::cout << "Конструктор с нормализацией (25:70): " << t4 << std::endl;
 }
 
 void demonstrateAddMinutes() {
@@ -62,7 +96,7 @@ void demonstrateAddMinutes() {
 
     try {
         Time time = getInputTime("(первое время)");
-        unsigned int minutesToAdd = InputHandler::inputMinutesFromConsole("Введите количество минут для добавления: ");
+        unsigned int minutesToAdd = getInputMinutes("(для добавления)");
 
         Time result = time.addMinutes(minutesToAdd);
         std::cout << "\nИсходное время: " << time << std::endl;
@@ -126,7 +160,7 @@ void demonstrateBinaryOperators() {
     try {
         Time time1 = getInputTime("(первое время)");
         Time time2 = getInputTime("(второе время)");
-        unsigned int minutes = InputHandler::inputMinutesFromConsole("Введите количество минут: ");
+        unsigned int minutes = getInputMinutes("(для операций)");
 
         std::cout << "\nПервое время: " << time1 << std::endl;
         std::cout << "Второе время: " << time2 << std::endl;
@@ -158,6 +192,8 @@ int main() {
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
 #endif
+
+    srand(static_cast<unsigned>(time(nullptr)));
 
     int choice;
     do {

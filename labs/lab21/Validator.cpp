@@ -1,28 +1,26 @@
 #include "Validator.h"
 #include <cctype>
+#include <cstdlib>
 
 bool Validator::isValidPositiveInteger(const std::string& input) {
     if (input.empty()) {
         return false;
     }
-    for (char c : input) {
-        if (!std::isdigit(static_cast<unsigned char>(c))) {
+    for (size_t i = 0; i < input.size(); ++i) {
+        if (!std::isdigit(static_cast<unsigned char>(input[i]))) {
             return false;
         }
     }
-    try {
-        return std::stoi(input) > 0;
-    } catch (...) {
-        return false;
-    }
+    int value = std::atoi(input.c_str());
+    return value > 0;
 }
 
 bool Validator::isValidNonNegativeInteger(const std::string& input) {
     if (input.empty()) {
         return false;
     }
-    for (char c : input) {
-        if (!std::isdigit(static_cast<unsigned char>(c))) {
+    for (size_t i = 0; i < input.size(); ++i) {
+        if (!std::isdigit(static_cast<unsigned char>(input[i]))) {
             return false;
         }
     }
@@ -41,7 +39,8 @@ bool Validator::isValidFilename(const std::string& filename) {
     if (filename.empty()) {
         return false;
     }
-    for (char c : filename) {
+    for (size_t i = 0; i < filename.size(); ++i) {
+        char c = filename[i];
         if (c == '<' || c == '>' || c == ':' || c == '"' || c == '|' || c == '?' || c == '*') {
             return false;
         }

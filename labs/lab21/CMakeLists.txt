@@ -13,4 +13,6 @@ add_executable(lab21 main.cpp
         Validator.h
         Validator.cpp
         InputHandler.h
-        InputHandler.cpp)
+        InputHandler.cpp
+        DynamicArray.h
+        Queue.h)

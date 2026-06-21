@@ -1,5 +1,5 @@
 #include "BinaryTree.h"
-#include <queue>
+#include "Stack.h"
 #include <stdexcept>
 #include <algorithm>
 
@@ -55,22 +55,28 @@ void BinaryTree::insertLevelOrder(int value) {
         root = newNode;
         return;
     }
-    std::queue<TreeNode*> q;
+    Stack<TreeNode*> q;
+    Stack<TreeNode*> tempStack;
     q.push(root);
-    while (!q.empty()) {
-        TreeNode* current = q.front();
+    while (true) {
+        if (q.isEmpty()) break;
+        TreeNode* current = q.top();
         q.pop();
         if (current->getLeft() == nullptr) {
             current->setLeft(newNode);
             return;
         } else {
-            q.push(current->getLeft());
+            tempStack.push(current->getLeft());
         }
         if (current->getRight() == nullptr) {
             current->setRight(newNode);
             return;
         } else {
-            q.push(current->getRight());
+            tempStack.push(current->getRight());
+        }
+        while (!tempStack.isEmpty()) {
+            q.push(tempStack.top());
+            tempStack.pop();
         }
     }
 }
@@ -100,17 +106,17 @@ void BinaryTree::insertSearch(int value) {
     }
 }
 
-void BinaryTree::postOrderTraversal(TreeNode* node, std::vector<int>& result) const {
+void BinaryTree::postOrderTraversal(TreeNode* node, DynamicArray<int>& result) const {
     if (node == nullptr) {
         return;
     }
     postOrderTraversal(node->getLeft(), result);
     postOrderTraversal(node->getRight(), result);
-    result.push_back(node->getValue());
+    result.pushBack(node->getValue());
 }
 
-std::vector<int> BinaryTree::getPostOrder() const {
-    std::vector<int> result;
+DynamicArray<int> BinaryTree::getPostOrder() const {
+    DynamicArray<int> result;
     postOrderTraversal(root, result);
     return result;
 }
@@ -135,11 +141,11 @@ int BinaryTree::countNodes(TreeNode* node) const {
     return 1 + countNodes(node->getLeft()) + countNodes(node->getRight());
 }
 
-int BinaryTree::findSecondMinimum(TreeNode* node, TreeNode*& parent, bool& found) const {
-    if (node == nullptr) {
+int BinaryTree::getSecondMinimum() const {
+    if (root == nullptr) {
         throw std::runtime_error("Дерево пустое");
     }
-    TreeNode* current = node;
+    TreeNode* current = root;
     TreeNode* prev = nullptr;
     while (current->getLeft() != nullptr) {
         prev = current;
@@ -156,12 +162,6 @@ int BinaryTree::findSecondMinimum(TreeNode* node, TreeNode*& parent, bool& found
         throw std::runtime_error("В дереве только один элемент");
     }
     return prev->getValue();
-}
-
-int BinaryTree::getSecondMinimum() const {
-    TreeNode* parent = nullptr;
-    bool found = false;
-    return findSecondMinimum(root, parent, found);
 }
 
 void BinaryTree::printGraphical(TreeNode* node, const std::string& prefix, bool isLeft, std::ostream& out) const {
@@ -184,11 +184,11 @@ void BinaryTree::printGraphical(std::ostream& out) const {
 }
 
 void BinaryTree::printPostOrder(std::ostream& out) const {
-    std::vector<int> result = getPostOrder();
+    DynamicArray<int> result = getPostOrder();
     out << "Концевой обход: [";
-    for (size_t i = 0; i < result.size(); ++i) {
+    for (int i = 0; i < result.getSize(); ++i) {
         out << result[i];
-        if (i < result.size() - 1) {
+        if (i < result.getSize() - 1) {
             out << ", ";
         }
     }

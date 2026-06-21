@@ -2,7 +2,8 @@
 #include "Validator.h"
 #include <iostream>
 #include <fstream>
-#include <random>
+#include <cstdlib>
+#include <ctime>
 #include <stdexcept>
 
 int InputHandler::readValidInteger(const std::string& prompt) {
@@ -82,13 +83,27 @@ Time InputHandler::inputTimeFromFile(const std::string& filename) {
 }
 
 Time InputHandler::generateRandomTime() {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> hoursDis(0, 23);
-    std::uniform_int_distribution<> minutesDis(0, 59);
-    return Time(static_cast<unsigned char>(hoursDis(gen)), static_cast<unsigned char>(minutesDis(gen)));
+    int hours = rand() % 24;
+    int minutes = rand() % 60;
+    return Time(static_cast<unsigned char>(hours), static_cast<unsigned char>(minutes));
 }
 
 unsigned int InputHandler::inputMinutesFromConsole(const std::string& prompt) {
     return readValidUnsignedInt(prompt);
+}
+
+unsigned int InputHandler::inputMinutesFromFile(const std::string& filename) {
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        throw std::runtime_error("Не удалось открыть файл: " + filename);
+    }
+    unsigned int minutes;
+    if (!(file >> minutes)) {
+        throw std::runtime_error("Некорректный формат файла");
+    }
+    return minutes;
+}
+
+unsigned int InputHandler::generateRandomMinutes() {
+    return static_cast<unsigned int>(rand() % 1440);
 }

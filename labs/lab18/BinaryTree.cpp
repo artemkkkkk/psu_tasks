@@ -47,26 +47,20 @@ bool BinaryTree::isEmpty() const {
     return root == nullptr;
 }
 
-void BinaryTree::insertSearchHelper(TreeNode** node, int value) {
-    if (*node == nullptr) {
-        *node = new TreeNode(value);
+void BinaryTree::insertSearchHelper(TreeNode*& node, int value) {
+    if (node == nullptr) {
+        node = new TreeNode(value);
         return;
     }
-    if (value < (*node)->getValue()) {
-        insertSearchHelper(&((*node)->getLeft()), value);
-    } else if (value > (*node)->getValue()) {
-        insertSearchHelper(&((*node)->getRight()), value);
+    if (value < node->getValue()) {
+        insertSearchHelper(node->getLeft(), value);
+    } else if (value > node->getValue()) {
+        insertSearchHelper(node->getRight(), value);
     }
 }
 
 void BinaryTree::insertSearch(int value) {
-    insertSearchHelper(&root, value);
-}
-
-void BinaryTree::buildFromValues(const int* values, int count) {
-    for (int i = 0; i < count; ++i) {
-        insertSearch(values[i]);
-    }
+    insertSearchHelper(root, value);
 }
 
 void BinaryTree::inOrderCollect(TreeNode* node, TreeNode*& prev, TreeNode*& head, TreeNode*& tail) {

@@ -1,19 +1,80 @@
 #include "InputHandler.h"
+#include "Validator.h"
 #include <iostream>
 #include <fstream>
-#include <random>
+#include <cstdlib>
+#include <ctime>
 #include <stdexcept>
 
+double InputHandler::readValidDouble(const std::string& prompt) {
+    std::string input;
+    while (true) {
+        std::cout << prompt;
+        std::cin >> input;
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
+            std::cout << "Ошибка ввода. Попробуйте снова." << std::endl;
+            continue;
+        }
+        if (Validator::isValidDouble(input)) {
+            return std::atof(input.c_str());
+        }
+        std::cout << "Некорректное число. Попробуйте снова." << std::endl;
+    }
+}
+
+int InputHandler::readValidInteger(const std::string& prompt) {
+    std::string input;
+    while (true) {
+        std::cout << prompt;
+        std::cin >> input;
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
+            std::cout << "Ошибка ввода. Попробуйте снова." << std::endl;
+            continue;
+        }
+        if (Validator::isValidInteger(input)) {
+            return std::atoi(input.c_str());
+        }
+        std::cout << "Некорректное целое число. Попробуйте снова." << std::endl;
+    }
+}
+
+int InputHandler::readValidPositiveInteger(const std::string& prompt) {
+    std::string input;
+    while (true) {
+        std::cout << prompt;
+        std::cin >> input;
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
+            std::cout << "Ошибка ввода. Попробуйте снова." << std::endl;
+            continue;
+        }
+        if (Validator::isValidPositiveInteger(input)) {
+            return std::atoi(input.c_str());
+        }
+        std::cout << "Некорректное положительное целое число. Попробуйте снова." << std::endl;
+    }
+}
+
+std::string InputHandler::readValidFilename(const std::string& prompt) {
+    std::string input;
+    while (true) {
+        std::cout << prompt;
+        std::cin >> input;
+        if (Validator::isValidFilename(input)) {
+            return input;
+        }
+        std::cout << "Некорректное имя файла. Попробуйте снова." << std::endl;
+    }
+}
+
 Point InputHandler::inputPointFromConsole() {
-    double x, y;
-    std::cout << "Введите координату X: ";
-    if (!(std::cin >> x)) {
-        throw std::invalid_argument("Некорректный ввод координаты X");
-    }
-    std::cout << "Введите координату Y: ";
-    if (!(std::cin >> y)) {
-        throw std::invalid_argument("Некорректный ввод координаты Y");
-    }
+    double x = readValidDouble("Введите координату X: ");
+    double y = readValidDouble("Введите координату Y: ");
     return Point(x, y);
 }
 
@@ -29,23 +90,32 @@ Student InputHandler::inputStudentFromConsole() {
     std::string name;
     std::cout << "Введите имя студента: ";
     std::cin >> name;
-    
-    std::vector<int> grades;
-    int gradeCount;
-    std::cout << "Введите количество оценок: ";
-    if (!(std::cin >> gradeCount) || gradeCount < 0) {
+
+    int gradeCount = readValidInteger("Введите количество оценок: ");
+    if (!Validator::isValidGradeCount(gradeCount)) {
         throw std::invalid_argument("Некорректное количество оценок");
     }
-    
+
+    DynamicArray<int> grades;
     for (int i = 0; i < gradeCount; ++i) {
         int grade;
-        std::cout << "Введите оценку " << (i + 1) << ": ";
-        if (!(std::cin >> grade) || grade < 2 || grade > 5) {
-            throw std::invalid_argument("Оценка должна быть от 2 до 5");
+        while (true) {
+            std::cout << "Введите оценку " << (i + 1) << ": ";
+            std::cin >> grade;
+            if (std::cin.fail()) {
+                std::cin.clear();
+                std::cin.ignore(10000, '\n');
+                std::cout << "Ошибка ввода. Попробуйте снова." << std::endl;
+                continue;
+            }
+            if (Validator::isValidGrade(grade)) {
+                break;
+            }
+            std::cout << "Оценка должна быть от 2 до 5. Попробуйте снова." << std::endl;
         }
-        grades.push_back(grade);
+        grades.pushBack(grade);
     }
-    
+
     return Student(name, grades);
 }
 
@@ -54,12 +124,12 @@ Point InputHandler::inputPointFromFile(const std::string& filename) {
     if (!file.is_open()) {
         throw std::runtime_error("Не удалось открыть файл: " + filename);
     }
-    
+
     double x, y;
     if (!(file >> x >> y)) {
         throw std::runtime_error("Некорректный формат файла");
     }
-    
+
     return Point(x, y);
 }
 
@@ -68,12 +138,12 @@ Line InputHandler::inputLineFromFile(const std::string& filename) {
     if (!file.is_open()) {
         throw std::runtime_error("Не удалось открыть файл: " + filename);
     }
-    
+
     double x1, y1, x2, y2;
     if (!(file >> x1 >> y1 >> x2 >> y2)) {
         throw std::runtime_error("Некорректный формат файла");
     }
-    
+
     return Line(x1, y1, x2, y2);
 }
 
@@ -82,29 +152,29 @@ Student InputHandler::inputStudentFromFile(const std::string& filename) {
     if (!file.is_open()) {
         throw std::runtime_error("Не удалось открыть файл: " + filename);
     }
-    
+
     std::string name;
     if (!(file >> name)) {
         throw std::runtime_error("Некорректный формат файла");
     }
-    
-    std::vector<int> grades;
+
+    DynamicArray<int> grades;
     int grade;
     while (file >> grade) {
-        if (grade < 2 || grade > 5) {
+        if (!Validator::isValidGrade(grade)) {
             throw std::runtime_error("Оценка должна быть от 2 до 5");
         }
-        grades.push_back(grade);
+        grades.pushBack(grade);
     }
-    
+
     return Student(name, grades);
 }
 
 Point InputHandler::generateRandomPoint() {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution<> dis(-100.0, 100.0);
-    return Point(dis(gen), dis(gen));
+    srand(static_cast<unsigned>(time(nullptr)));
+    double x = (rand() % 20000 - 10000) / 100.0;
+    double y = (rand() % 20000 - 10000) / 100.0;
+    return Point(x, y);
 }
 
 Line InputHandler::generateRandomLine() {
@@ -116,23 +186,16 @@ Student InputHandler::generateRandomStudent() {
 }
 
 std::string InputHandler::generateRandomName() {
-    std::vector<std::string> names = {"Вася", "Петя", "Коля", "Маша", "Даша", "Саша"};
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(0, names.size() - 1);
-    return names[dis(gen)];
+    const char* names[] = {"Вася", "Петя", "Коля", "Маша", "Даша", "Саша"};
+    int index = rand() % 6;
+    return std::string(names[index]);
 }
 
-std::vector<int> InputHandler::generateRandomGrades() {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> countDis(1, 5);
-    std::uniform_int_distribution<> gradeDis(2, 5);
-    
-    std::vector<int> grades;
-    int count = countDis(gen);
+DynamicArray<int> InputHandler::generateRandomGrades() {
+    DynamicArray<int> grades;
+    int count = rand() % 5 + 1;
     for (int i = 0; i < count; ++i) {
-        grades.push_back(gradeDis(gen));
+        grades.pushBack(rand() % 4 + 2);
     }
     return grades;
 }

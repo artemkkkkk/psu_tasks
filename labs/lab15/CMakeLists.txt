@@ -11,4 +11,10 @@ add_executable(lab15 main.cpp
         Student.h
         Student.cpp
         InputHandler.h
-        InputHandler.cpp)
+        InputHandler.cpp
+        DynamicArray.h
+        Stack.h
+        Queue.h
+        Queue.cpp
+        Validator.h
+        Validator.cpp)

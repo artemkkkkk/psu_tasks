@@ -4,9 +4,22 @@
 
 Graph::Graph() : vertexCount(0) {}
 
-Graph::Graph(int vertexCount) : vertexCount(vertexCount), adjacencyMatrix(vertexCount, std::vector<int>(vertexCount, 0)) {}
+Graph::Graph(int vertexCount) : vertexCount(vertexCount) {
+    initializeMatrix(vertexCount);
+}
 
 Graph::~Graph() {}
+
+void Graph::initializeMatrix(int n) {
+    adjacencyMatrix = DynamicArray<DynamicArray<int>>();
+    for (int i = 0; i < n; ++i) {
+        DynamicArray<int> row;
+        for (int j = 0; j < n; ++j) {
+            row.pushBack(0);
+        }
+        adjacencyMatrix.pushBack(row);
+    }
+}
 
 int Graph::getVertexCount() const {
     return vertexCount;
@@ -26,7 +39,7 @@ void Graph::setEdge(int i, int j, int value) {
     adjacencyMatrix[i][j] = value;
 }
 
-const std::vector<std::vector<int>>& Graph::getAdjacencyMatrix() const {
+const DynamicArray<DynamicArray<int>>& Graph::getAdjacencyMatrix() const {
     return adjacencyMatrix;
 }
 

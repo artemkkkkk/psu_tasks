@@ -8,6 +8,7 @@
 #include "Validator.h"
 #include <iostream>
 #include <stdexcept>
+#include <ctime>
 
 void task1Graf1() {
     std::cout << "\n========== Graf1: Степени вершин неориентированного графа ==========" << std::endl;
@@ -156,6 +157,8 @@ int main() {
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
 #endif
+
+    srand(static_cast<unsigned>(time(nullptr)));
 
     int choice;
     do {
