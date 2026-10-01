@@ -1,0 +1,6 @@
+apple
+an
+cat
+dog
+big
+elephant
